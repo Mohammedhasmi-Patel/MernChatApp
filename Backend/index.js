@@ -1,7 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-
 import UserRoute from "./Routes/User.route.js";
 const app = express();
 
@@ -11,18 +10,17 @@ const PORT = process.env.PORT;
 app.use(express.json());
 
 try {
-  mongoose.connect(process.env.MONGODB_URI);
+  await mongoose.connect(process.env.MONGODBURI);
   console.log("database connection successful");
 } catch (error) {
-  console.log(`database connection error ${err}`);
+  console.log(`database connection error ${error}`);
 }
 
 app.get("/", (req, res) => {
   res.send("Hello Hasmi");
 });
 
-// middleWares
-
+// routing
 app.use("/user", UserRoute);
 
 app.listen(PORT, () => {
