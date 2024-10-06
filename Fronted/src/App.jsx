@@ -1,14 +1,11 @@
 import React from "react";
 import Left from "./Home/LeftPart/Left";
 import Right from "./Home/RightPart/Right";
+import SignUp from "./Components/SignUp";
+import Login from "./Components/Login";
 
 function App() {
-  return (
-    <div className="flex h-screen">
-      <Left />
-      <Right />
-    </div>
-  );
+  return <SignUp />;
 }
 
 export default App;
