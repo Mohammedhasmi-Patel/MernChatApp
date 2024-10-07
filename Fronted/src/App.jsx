@@ -5,7 +5,13 @@ import SignUp from "./Components/SignUp";
 import Login from "./Components/Login";
 
 function App() {
-  return <SignUp />;
+  return (
+    // <div className="flex">
+    //   <Left />
+    //   <Right />
+    // </div>
+    <SignUp />
+  );
 }
 
 export default App;

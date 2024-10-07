@@ -17,7 +17,7 @@ function SignUp() {
     return value === Password || "password not match";
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const userInfo = {
       fullname: data.Fullname,
       email: data.Email,
@@ -25,13 +25,13 @@ function SignUp() {
       confirmPassword: data.confirmPassword,
     };
 
-    axios
+    await axios
       .post("http://localhost:8000/user/signup", userInfo)
       .then((response) => {
         if (response.data) {
           alert("signup sucessfully done..");
         }
-        localStorage.setItem("chatApp", response.data);
+        localStorage.setItem("chatApp", JSON.stringify(response.data));
       })
       .catch((error) => {
         alert(`Error:${error.response.data.error}`);

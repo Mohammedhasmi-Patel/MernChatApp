@@ -49,8 +49,7 @@ export const login = async (req, res) => {
     // it's not existing user
     if (!user) {
       return res.status(401).json({
-        error:
-          "This email is already registered. Please use a different email or log in instead.......",
+        error: "User not found. Please check the email and try again.",
       });
     }
     // email is right now go for password
@@ -88,3 +87,5 @@ export const logout = (req, res) => {
     res.status(500).json({ error: "internal server error.." });
   }
 };
+
+// create api to see data into fronted

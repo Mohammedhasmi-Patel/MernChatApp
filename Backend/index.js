@@ -10,7 +10,12 @@ const PORT = process.env.PORT;
 
 // middleware
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:8000", // Frontend URL where your React app is running
+    credentials: true, // Allow sending cookies with cross-origin requests
+  })
+);
 
 try {
   await mongoose.connect(process.env.MONGODBURI);

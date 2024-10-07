@@ -1,15 +1,30 @@
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 function Login() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    const userInfo = {
+      email: data.Email,
+      password: data.Password,
+    };
 
+    axios
+      .post("http://localhost:8000/user/login", userInfo)
+      .then((response) => {
+        if (response.data) {
+          alert("login successfully done.....");
+        }
+      })
+      .catch((error) => {
+        alert(`Error:${error.response.data.error}`);
+      });
+  };
   return (
     <>
       <div className="flex h-screen items-center justify-center">
