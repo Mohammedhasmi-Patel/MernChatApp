@@ -1,13 +1,19 @@
-// import { createContext } from "react"
+import { createContext, useContext, useState } from "react";
+import Cookies from "js-cookie";
+export const AuthContext = createContext();
+export const AuthProvider = ({ children }) => {
+  const initialUserState =
+    Cookies.get("jwt") || localStorage.getItem("chatApp");
 
-// export const AuthContext = createContext()
-// const AuthProvider = ({children})=> {
-//   const initialState =
-//   return (
-//     <div>
+  // parse the user data and storing in state
+  const [authUser, setAuthUser] = useState(
+    initialUserState ? JSON.parse(initialUserState) : undefined
+  );
+  return (
+    <AuthContext.Provider value={[authUser, setAuthUser]}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
 
-//     </div>
-//   )
-// }
-
-// export default AuthProvider
+export const useAuth = () => useContext(AuthContext);
