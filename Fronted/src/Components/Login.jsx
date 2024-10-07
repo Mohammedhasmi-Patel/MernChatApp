@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useAuth } from "../Context/AuthProvider";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [authUser, setAuthUser] = useAuth();
@@ -93,9 +94,12 @@ function Login() {
           <div className="flex justify-between">
             <p>
               New User?
-              <span className="text-blue-700 font-bold cursor-pointer ml-2">
+              <Link
+                to="/signup"
+                className="text-blue-700 font-bold cursor-pointer ml-2"
+              >
                 SignUp
-              </span>
+              </Link>
             </p>
             <input
               type="submit"

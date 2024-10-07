@@ -88,4 +88,14 @@ export const logout = (req, res) => {
   }
 };
 
-// create api to see data into fronted
+// create api to fetch all the data from the batabase
+
+export const allUsers = async (req, res) => {
+  try {
+    const allUsers = await User.find().select("-password");
+    res.status(201).json(allUsers);
+  } catch (error) {
+    console.log(`error in all controller users ${error}`);
+    res.status(500).json({ error: "internal server error" });
+  }
+};
