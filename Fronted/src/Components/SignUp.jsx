@@ -1,5 +1,5 @@
-import React from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 function SignUp() {
   const {
@@ -9,7 +9,34 @@ function SignUp() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  // watch the password and confirmPassword
+  const Password = watch("Password", "");
+  const confirmPassword = watch("confirmPassword", "");
+
+  const validatePasswordMatch = (value) => {
+    return value === Password || "password not match";
+  };
+
+  const onSubmit = (data) => {
+    const userInfo = {
+      fullname: data.Fullname,
+      email: data.Email,
+      password: data.Password,
+      confirmPassword: data.confirmPassword,
+    };
+
+    axios
+      .post("http://localhost:8000/user/signup", userInfo)
+      .then((response) => {
+        if (response.data) {
+          alert("signup sucessfully done..");
+        }
+        localStorage.setItem("chatApp", response.data);
+      })
+      .catch((error) => {
+        alert(`Error:${error.response.data.error}`);
+      });
+  };
 
   return (
     <>
@@ -105,14 +132,19 @@ function SignUp() {
               />
             </svg>
             <input
-              {...register("confirmPassword", { required: true })}
+              {...register("confirmPassword", {
+                required: true,
+                validate: validatePasswordMatch,
+              })}
               type="password"
               className="grow"
               placeholder="Confirm Password"
             />
           </label>
-          {errors.ConfirmPassword && (
-            <span className="text-red-500 text-sm">This field is required</span>
+          {errors.confirmPassword && (
+            <span className="text-red-500 text-sm">
+              {errors.confirmPassword.message}
+            </span>
           )}
 
           {/* text and button */}

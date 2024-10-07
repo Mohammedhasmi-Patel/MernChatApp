@@ -2,12 +2,15 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import UserRoute from "./Routes/User.route.js";
+import cors from "cors";
 const app = express();
 
 dotenv.config();
 const PORT = process.env.PORT;
 
+// middleware
 app.use(express.json());
+app.use(cors());
 
 try {
   await mongoose.connect(process.env.MONGODBURI);
