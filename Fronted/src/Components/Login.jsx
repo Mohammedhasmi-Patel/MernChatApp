@@ -18,7 +18,7 @@ function Login() {
     };
 
     axios
-      .post("http://localhost:8000/user/login", userInfo)
+      .post("/api/user/login", userInfo)
       .then((response) => {
         if (response.data) {
           alert("login successfully done.....");

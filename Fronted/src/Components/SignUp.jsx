@@ -30,7 +30,7 @@ function SignUp() {
     };
 
     await axios
-      .post("http://localhost:8000/user/signup", userInfo)
+      .post("/api/user/signup", userInfo)
       .then((response) => {
         if (response.data) {
           alert("signup sucessfully done..");

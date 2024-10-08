@@ -6,12 +6,14 @@ import {
   allUsers,
 } from "../Controller/User.controller.js";
 
+import secureRoute from "../Middleware/sucureRoute.js";
+
 const router = express.Router();
 
 // when this come into url we need signup function called after.
 router.post("/signup", signUp);
 router.post("/login", login);
 router.post("/logout", logout);
-router.get("/allusers", allUsers);
+router.get("/allusers", secureRoute, allUsers);
 
 export default router;
