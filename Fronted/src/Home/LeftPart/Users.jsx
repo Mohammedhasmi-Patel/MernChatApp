@@ -13,25 +13,9 @@ function Users() {
         className=" py-2 flex-1 overflow-y-auto"
         style={{ maxHeight: "calc(84vh - 10vh)" }}
       >
-        <User />
-        <User />
-        <User />
-        <User />
-        <User />
-        <User />
-        <User />
-        <User />
-        <User />
-        <User />
-        <User />
-        <User />
-        <User />
-        <User />
-        <User />
-        <User />
-        <User />
-        <User />
-        <User />
+        {allUsers.map((user) => {
+          return <User key={user._id} user={user} />;
+        })}
       </div>
     </div>
   );
