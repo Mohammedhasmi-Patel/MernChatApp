@@ -1,4 +1,7 @@
+import useConversation from "../../Zustand/useConversation.js";
 function ChatUser() {
+  const { selectedConversation } = useConversation();
+  console.log(selectedConversation);
   return (
     <div className="flex space-x-3 items-center h-[8vh] justify-center bg-gray-700 hover:bg-gray-500 duration-300">
       <div className="avatar online">
@@ -7,7 +10,7 @@ function ChatUser() {
         </div>
       </div>
       <div>
-        <h1 className="text-xl">Hasmi</h1>
+        <h1 className="text-xl">{selectedConversation.fullname}</h1>
         <span className="text-sm">Online</span>
       </div>
     </div>
