@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import UserRoute from "./Routes/User.route.js";
+import messageRoute from "./Routes/Message.route.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 const app = express();
@@ -32,6 +33,7 @@ app.get("/", (req, res) => {
 
 // routing
 app.use("/api/user", UserRoute);
+app.use("/api/message", messageRoute);
 
 app.listen(PORT, () => {
   console.log(`server listening at ${PORT}`);

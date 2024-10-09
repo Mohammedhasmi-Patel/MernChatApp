@@ -5,18 +5,18 @@ const secureRoute = async (req, res, next) => {
   try {
     const token = req.cookies.jwt;
     if (!token) {
-      return res.status(403).json({ error: "No token,authorization denied" });
+      return res.status(401).json({ error: "No token, authorization denied" });
     }
 
     // if we find token then we need to decode first
-    const decoded = jwt.verify(token, process.env.JWT_TOKEN);
+    const decoded = await jwt.verify(token, process.env.JWT_TOKEN);
 
     if (!decoded) {
       return res.status(401).json({ error: "invalid token.." });
     }
 
     // now everything is fine ,so we will just findout our user from the database
-    const user = await User.findById(decoded.userId).select("-password");
+    const user = await User.findById(decoded.userId).select("-password"); // current login user
     if (!user) {
       return res.status(401).json({ error: "no user found..." });
     }
