@@ -20,6 +20,7 @@ function useGetAllUsers() {
         setLoading(false);
       } catch (error) {
         console.log(`error in useGetAllUsers ${error}`);
+        setLoading(false);
       }
     };
     getUsers();

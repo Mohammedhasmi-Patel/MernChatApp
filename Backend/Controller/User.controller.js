@@ -89,7 +89,6 @@ export const logout = (req, res) => {
 };
 
 // create api to fetch all the data from the batabase
-
 export const allUsers = async (req, res) => {
   try {
     const loggedInUser = req.user._id;

@@ -1,9 +1,13 @@
-function Message() {
+function Message({ message }) {
+  console.log("Message received:", message); // Check if the message is received
+
   return (
     <div>
       <div className="p-4">
         <div className="chat chat-end">
-          <div className="chat-bubble chat-bubble-info">Calm down, Anakin.</div>
+          <div className="chat-bubble text-white chat-bubble-info">
+            {message.message}
+          </div>
         </div>
         <div className="chat chat-start">
           <div className="chat-bubble chat-bubble-warning">
