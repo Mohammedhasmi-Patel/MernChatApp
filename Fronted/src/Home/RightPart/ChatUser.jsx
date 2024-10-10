@@ -10,7 +10,7 @@ function ChatUser() {
         </div>
       </div>
       <div>
-        <h1 className="text-xl">Hasmmi</h1>
+        <h1 className="text-xl">{selectedConversation.fullname}</h1>
         <span className="text-sm">Online</span>
       </div>
     </div>
