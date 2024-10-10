@@ -20,7 +20,7 @@ function TypeSend() {
             type="text"
             value={message}
             placeholder="Type here"
-            className="border  border-gray-700 rounded-xl outline-none px-4 py-3 mt-1 w-full"
+            className="border  border-gray-700 rounded-xl bg-black outline-none px-4 py-3 mt-1 w-full"
             onChange={(e) => setMessage(e.target.value)}
           />
         </div>

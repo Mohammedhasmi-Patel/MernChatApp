@@ -5,7 +5,7 @@ import UserRoute from "./Routes/User.route.js";
 import messageRoute from "./Routes/Message.route.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-const app = express();
+import { app, server } from "./SocketIO/server.js";
 
 dotenv.config();
 const PORT = process.env.PORT;
@@ -14,7 +14,7 @@ const PORT = process.env.PORT;
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:8000", // Frontend URL where your React app is running
+    origin: "http://localhost:3001", // Frontend URL where your React app is running
     credentials: true, // Allow sending cookies with cross-origin requests
   })
 );
@@ -35,6 +35,6 @@ app.get("/", (req, res) => {
 app.use("/api/user", UserRoute);
 app.use("/api/message", messageRoute);
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`server listening at ${PORT}`);
 });
