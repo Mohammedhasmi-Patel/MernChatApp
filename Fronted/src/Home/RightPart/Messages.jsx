@@ -2,10 +2,12 @@ import Message from "./Message";
 import useGetMessage from "../../Context/useGetMessage";
 import Loading from "../../Components/Loading";
 import { useEffect, useRef } from "react";
+import useGetSocketMessage from "../../Context/useGetSocketMessage";
 
 function Messages() {
   const { loading, messages } = useGetMessage();
-  console.log(`in Messages component `);
+
+  useGetSocketMessage(); // listening incoming msg
 
   const lastMsgRef = useRef();
   useEffect(() => {
