@@ -15,7 +15,6 @@ const io = new Server(server, {
 });
 
 // making function to handle real time message
-
 export const getReceiverSocketId = (receiverId) => {
   return users[receiverId];
 };

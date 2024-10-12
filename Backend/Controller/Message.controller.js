@@ -1,6 +1,6 @@
 import Conversation from "../Models/Conversation.model.js";
 import Message from "../Models/Message.model.js";
-import { getReceiverSocketId } from "../SocketIO/server.js";
+import { getReceiverSocketId, io } from "../SocketIO/server.js";
 
 export const sendMessage = async (req, res) => {
   try {
@@ -34,18 +34,15 @@ export const sendMessage = async (req, res) => {
     if (receiverSocketId) {
       io.to(receiverSocketId).emit("newMessage", newMessage);
     }
-    res.status(201).json({
-      message: "Message sent successfully",
-      newMessage,
-    });
+
+    return res.status(201).json(newMessage);
   } catch (error) {
     console.log(`error in sendMessage controller ${error}`);
-    res.status(500).json({ error: "internal server error" });
+    return res.status(500).json({ error: "internal server error" });
   }
 };
 
-// fetching all the message from the datbase\
-
+// fetching all the message from the datbase
 export const getMessage = async (req, res) => {
   try {
     const { id: chatUser } = req.params;

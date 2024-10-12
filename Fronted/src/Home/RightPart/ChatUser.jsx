@@ -5,7 +5,7 @@ function ChatUser() {
   const { onlineUsers } = useSocketContext();
 
   const getOnlineUsersStatus = (userId) => {
-    return onlineUsers.includes(userId) ? "Online" : "Ofline";
+    return onlineUsers.includes(userId) ? "Online" : "";
   };
 
   console.log(selectedConversation);

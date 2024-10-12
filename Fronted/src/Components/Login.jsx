@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useState, useEffect } from "react";
 import { useAuth } from "../Context/AuthProvider";
 import { Link } from "react-router-dom";
 
@@ -11,6 +12,9 @@ function Login() {
     formState: { errors },
   } = useForm();
 
+  const [message, setMessage] = useState(""); // State for success/error messages
+  const [messageType, setMessageType] = useState(""); // 'success' or 'error' to control the message color
+
   const onSubmit = (data) => {
     const userInfo = {
       email: data.Email,
@@ -21,15 +25,28 @@ function Login() {
       .post("/api/user/login", userInfo)
       .then((response) => {
         if (response.data) {
-          alert("login successfully done.....");
+          setMessage("Login successfully done!");
+          setMessageType("success");
+          localStorage.setItem("chatApp", JSON.stringify(response.data));
+          setAuthUser(response.data);
         }
-        localStorage.setItem("chatApp", JSON.stringify(response.data));
-        setAuthUser(response.data);
       })
       .catch((error) => {
-        alert(`Error:${error.response.data.error}`);
+        setMessage(`Error: ${error.response.data.error}`);
+        setMessageType("error");
       });
   };
+
+  // Automatically hide message after 1 second
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => {
+        setMessage("");
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
+
   return (
     <>
       <div className="flex h-screen items-center justify-center">
@@ -90,7 +107,6 @@ function Login() {
           )}
 
           {/* text and button */}
-
           <div className="flex justify-between">
             <p>
               New User?
@@ -108,6 +124,17 @@ function Login() {
             />
           </div>
         </form>
+
+        {/* Popup for success or error message */}
+        {message && (
+          <div
+            className={`absolute top-10 left-1/2 transform -translate-x-1/2 py-2 px-4 rounded-md text-white ${
+              messageType === "success" ? "bg-green-500" : "bg-red-500"
+            }`}
+          >
+            {message}
+          </div>
+        )}
       </div>
     </>
   );

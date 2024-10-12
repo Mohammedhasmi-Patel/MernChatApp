@@ -18,8 +18,5 @@ function useGetSocketMessage() {
       socket.off("newMessage");
     };
   }, [socket, messages, setMessage]);
-
-  return <div></div>;
 }
-
 export default useGetSocketMessage;
