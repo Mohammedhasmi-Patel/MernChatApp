@@ -9,7 +9,8 @@ function useGetAllUsers() {
     const getUsers = async () => {
       setLoading(true);
       try {
-        const token = Cookies.get("jwt");
+        const token = localStorage.getItem("jwt");
+
         const response = await axios.get("/api/user/allusers", {
           credentials: "include",
           headers: {

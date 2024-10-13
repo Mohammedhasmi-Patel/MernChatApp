@@ -11,8 +11,14 @@ function useGetMessage() {
       setLoading(true);
       if (selectedConversation && selectedConversation._id) {
         try {
+          const token = localStorage.getItem("jwt");
           const response = await axios.get(
-            `/api/message/get/${selectedConversation._id}`
+            `/api/message/get/${selectedConversation._id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
           );
           setLoading(false);
           setMessage(response.data);

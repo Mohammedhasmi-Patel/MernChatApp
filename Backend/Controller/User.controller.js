@@ -29,10 +29,10 @@ export const signUp = async (req, res) => {
     await newUser.save();
     if (newUser) {
       // this is we will got from mongodb dbs
-      createTokenAndSaveCookie(newUser._id, res);
+      const token = createTokenAndSaveCookie(newUser._id, res);
       return res
         .status(201)
-        .json({ message: "User Created succesfullly...", newUser });
+        .json({ message: "User Created succesfullly...", newUser, token });
     }
   } catch (error) {
     console.log(error);
@@ -60,7 +60,7 @@ export const login = async (req, res) => {
     }
     // means email and pass both are correct now go for generating token
     else {
-      createTokenAndSaveCookie(user._id, res);
+      const token = createTokenAndSaveCookie(user._id, res);
 
       return res.status(200).json({
         message: "user login successfully..",
@@ -68,6 +68,7 @@ export const login = async (req, res) => {
           _id: user._id,
           fullname: user.fullname,
           email: user.email,
+          token,
         },
       });
     }

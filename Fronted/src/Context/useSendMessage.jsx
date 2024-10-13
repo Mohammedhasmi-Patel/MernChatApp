@@ -9,9 +9,16 @@ function useSendMessage() {
   const sendMessage = async (message) => {
     setLoading(true);
     try {
+      const token = localStorage.getItem("jwt");
+
       const response = await axios.post(
         `/api/message/send/${selectedConversation._id}`,
-        { message }
+        { message },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setLoading(false);
       setMessage([...messages, response.data]);

@@ -27,6 +27,7 @@ function Login() {
         if (response.data) {
           setMessage("Login successfully done!");
           setMessageType("success");
+          localStorage.setItem("jwt", response.data?.user?.token);
           localStorage.setItem("chatApp", JSON.stringify(response.data));
           setAuthUser(response.data);
         }
